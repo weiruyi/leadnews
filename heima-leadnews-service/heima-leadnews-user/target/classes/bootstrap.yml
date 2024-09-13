@@ -1,0 +1,18 @@
+server:
+  port: 51801
+spring:
+  application:
+    name: leadnews-user
+  cloud:
+    nacos:
+      server-addr: 49.234.52.192:8848
+      discovery:
+        namespace: news-dev
+        group: news
+      config:
+        namespace: news-dev
+        group: news
+        file-extension: yml
+  #忽略掉配置类
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
