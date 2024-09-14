@@ -1,6 +1,7 @@
 package com.heima.model.common.enums;
 
 public enum AppHttpCodeEnum {
+    MATERIASL_REFERENCE_FAIL(501, "素材引用失效"),
 
     // 成功段0
     SUCCESS(200,"操作成功"),
