@@ -104,6 +104,10 @@ public class WmNewsAutoScanServiceImpl implements WmNewsAutoScanService {
 			dto.setId(wmNews.getArticleId());
 		}
 		dto.setCreatedTime(new Date());
+		if(dto.getPublishTime() == null){
+			dto.setPublishTime(new Date());
+		}
+
 
 		ResponseResult responseResult = articleClient.saveArticle(dto);
 		return responseResult;

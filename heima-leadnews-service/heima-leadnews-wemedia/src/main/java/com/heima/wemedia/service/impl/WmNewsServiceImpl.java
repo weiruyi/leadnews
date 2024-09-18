@@ -116,6 +116,7 @@ public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> impleme
 		}
 		WmNews wmNews = new WmNews();
 		BeanUtils.copyProperties(dto, wmNews);
+		wmNews.setPublishTime(dto.getPublishTime());
 		wmNews.setUserId(user.getId());
 		//image list->string
 		if(dto.getImages() != null && dto.getImages().size() > 0){
