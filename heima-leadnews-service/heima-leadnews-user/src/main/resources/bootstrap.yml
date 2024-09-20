@@ -13,6 +13,6 @@ spring:
         namespace: news-dev
         group: news
         file-extension: yml
-  #忽略掉配置类
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+#  #忽略掉配置类
+#  autoconfigure:
+#    exclude: org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration

@@ -24,6 +24,7 @@ import com.heima.wemedia.mapper.WmNewsMapper;
 import com.heima.wemedia.mapper.WmNewsMaterialMapper;
 import com.heima.wemedia.service.WmNewsAutoScanService;
 import com.heima.wemedia.service.WmNewsService;
+import com.heima.wemedia.service.WmNewsTaskService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -42,7 +43,7 @@ import java.util.stream.Collectors;
 public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> implements WmNewsService {
 	private final WmNewsMaterialMapper wmNewsMaterialMapper;
 	private final WmMaterialMapper wmMaterialMapper;
-	private final WmNewsAutoScanService wmNewsAutoScanService;
+	private final WmNewsTaskService wmNewsTaskService;
 
 	/**
 	 * 查询文章
@@ -146,7 +147,8 @@ public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> impleme
 		saveRelativeInfoForCover(dto,wmNews,materials);
 
 		//异步审核文章
-		wmNewsAutoScanService.autoScanWmNews(wmNews.getId());
+//		wmNewsAutoScanService.autoScanWmNews(wmNews.getId());
+		wmNewsTaskService.addNewsToTask(wmNews.getId(),wmNews.getPublishTime());
 
 		return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
 

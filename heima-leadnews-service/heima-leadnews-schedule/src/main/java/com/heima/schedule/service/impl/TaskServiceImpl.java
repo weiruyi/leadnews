@@ -58,7 +58,7 @@ public class TaskServiceImpl implements TaskService {
 	 * @return
 	 */
 	@Override
-	public boolean cancleTask(long taskId) {
+	public boolean cancelTask(long taskId) {
 		boolean flag = false;
 
 		//删除任务，更新日志
