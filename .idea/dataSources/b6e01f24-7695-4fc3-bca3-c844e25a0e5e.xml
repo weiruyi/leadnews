@@ -1037,7 +1037,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <CollationName>utf8mb4_unicode_ci</CollationName>
     </schema>
     <schema id="283" parent="1" name="leadnews_schedule">
-      <LastIntrospectionLocalTimestamp>2024-09-19.03:26:52</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-09-23.04:53:37</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_unicode_ci</CollationName>
     </schema>
     <schema id="284" parent="1" name="leadnews_user">
