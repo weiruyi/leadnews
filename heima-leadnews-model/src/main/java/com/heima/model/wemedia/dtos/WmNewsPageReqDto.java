@@ -28,4 +28,8 @@ public class WmNewsPageReqDto extends PageRequestDto {
 	 * 关键字
 	 */
 	private String keyword;
+
+	private String msg;
+	private String title;
+	private Integer id;
 }

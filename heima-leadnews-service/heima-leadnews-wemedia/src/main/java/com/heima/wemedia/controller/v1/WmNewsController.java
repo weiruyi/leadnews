@@ -6,10 +6,7 @@ import com.heima.model.wemedia.dtos.WmNewsPageReqDto;
 import com.heima.wemedia.service.WmNewsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -34,6 +31,26 @@ public class WmNewsController {
 	@PostMapping("/down_or_up")
 	public ResponseResult downOrUp(@RequestBody WmNewsDto dto){
 		return wmNewsService.downOrUp(dto);
+	}
+
+	@PostMapping("/list_vo")
+	public ResponseResult listVo(@RequestBody WmNewsPageReqDto dto){
+		return wmNewsService.listVo(dto);
+	}
+
+	@GetMapping("/one_vo/{id}")
+	public ResponseResult oneVo(@PathVariable Integer id){
+		return wmNewsService.oneVo(id);
+	}
+
+	@PostMapping("/auth_fail")
+	public ResponseResult authFail(@RequestBody WmNewsPageReqDto dto){
+		return wmNewsService.auth(dto, (short)2);
+	}
+
+	@PostMapping("/auth_pass")
+	public ResponseResult authPass(@RequestBody WmNewsPageReqDto dto){
+		return wmNewsService.auth(dto, (short)4);
 	}
 
 }

@@ -48,6 +48,76 @@ public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> impleme
 	private final WmMaterialMapper wmMaterialMapper;
 	private final WmNewsTaskService wmNewsTaskService;
 	private final KafkaTemplate<String, String> kafkaTemplate;
+	private final WmNewsMapper wmNewsMapper;
+
+	/**
+	 * 人工审核
+	 *
+	 * @param dto
+	 * @param status
+	 * @return
+	 */
+	@Override
+	public ResponseResult auth(WmNewsPageReqDto dto, Short status) {
+		if(dto == null || status == null || dto.getId() == null){
+			return  ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
+		}
+		WmNews wmNews = wmNewsMapper.selectById(dto.getId());
+		if(wmNews == null){
+			return  ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
+		}
+		wmNews.setStatus(status);
+		wmNews.setReason(dto.getMsg());
+		wmNewsMapper.updateById(wmNews);
+		return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
+	}
+
+	/**
+	 * 查询文章详细信息
+	 *
+	 * @param id
+	 * @return
+	 */
+	@Override
+	public ResponseResult oneVo(Integer id) {
+		if(id == null){
+			return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
+		}
+		WmNews wmNews = wmNewsMapper.selectById(id);
+		if(wmNews == null){
+			return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
+		}
+		return ResponseResult.okResult(wmNews);
+	}
+
+	/**
+	 * 人工审核分页查询
+	 *
+	 * @param dto
+	 * @return
+	 */
+	@Override
+	public ResponseResult listVo(WmNewsPageReqDto dto) {
+		if(dto == null){
+			return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
+		}
+		dto.checkParam();
+
+		IPage page = new Page(dto.getPage(), dto.getSize());
+		LambdaQueryWrapper<WmNews> queryWrapper = new LambdaQueryWrapper<>();
+		if(dto.getStatus() != null){
+			queryWrapper.eq(WmNews::getStatus, dto.getStatus());
+		}
+		if(StringUtils.isNotBlank(dto.getTitle())){
+			queryWrapper.like(WmNews::getTitle, dto.getTitle());
+		}
+		queryWrapper.orderByDesc(WmNews::getCreatedTime);
+		page = page(page, queryWrapper);
+
+		ResponseResult responseResult = new PageResponseResult(dto.getPage(), dto.getSize(), (int)page.getTotal());
+		responseResult.setData(page.getRecords());
+		return responseResult;
+	}
 
 	/**
 	 * 查询文章
