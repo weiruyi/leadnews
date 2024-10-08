@@ -22,8 +22,9 @@ public class ArticleHomeController {
 	@PostMapping("/load")
 	public ResponseResult load(@RequestBody ArticleHomeDto dto) {
 		log.info("加载文章内容，dto={}", dto.toString());
-		ResponseResult responseResult = articleService.load(dto, ArticleConstants.LOADTYPE_LOAD_MORE);
-		return responseResult;
+//		ResponseResult responseResult = articleService.load(dto, ArticleConstants.LOADTYPE_LOAD_MORE);
+//		return responseResult;
+		return articleService.load2(dto, ArticleConstants.LOADTYPE_LOAD_MORE,true);
 	}
 
 
