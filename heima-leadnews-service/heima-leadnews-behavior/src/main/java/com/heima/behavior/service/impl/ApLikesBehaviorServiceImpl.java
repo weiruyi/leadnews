@@ -65,7 +65,7 @@ public class ApLikesBehaviorServiceImpl implements ApLikesBehaviorService {
         }
 
         //发送消息，数据聚合
-//        kafkaTemplate.send(HotArticleConstants.HOT_ARTICLE_SCORE_TOPIC,JSON.toJSONString(mess));
+        kafkaTemplate.send(HotArticleConstants.HOT_ARTICLE_SCORE_TOPIC,JSON.toJSONString(mess));
 
 
         return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);

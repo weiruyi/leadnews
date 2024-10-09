@@ -56,7 +56,7 @@ public class ApReadBehaviorServiceImpl implements ApReadBehaviorService {
         mess.setArticleId(dto.getArticleId());
         mess.setType(UpdateArticleMess.UpdateArticleType.VIEWS);
         mess.setAdd(1);
-//        kafkaTemplate.send(HotArticleConstants.HOT_ARTICLE_SCORE_TOPIC,JSON.toJSONString(mess));
+        kafkaTemplate.send(HotArticleConstants.HOT_ARTICLE_SCORE_TOPIC,JSON.toJSONString(mess));
 
 
         return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
